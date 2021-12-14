@@ -7,6 +7,7 @@
 # Licence : MIT
 ####**********************************************************************###
 
+if (!require("signal")) install.packages("signal")
 library(signal)
 
 # Constant : minimum value possible
