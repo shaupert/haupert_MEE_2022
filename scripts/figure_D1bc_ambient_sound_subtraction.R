@@ -2,8 +2,10 @@
 rm(list = ls())
 
 #=======================================================================================================#
+#
 #                                           SET WORKING DIRECTORIES 
 #                                           LOAD MY TOOLBOX
+#
 #=======================================================================================================#
 
 ##### Change working directory to the current script directory
@@ -13,12 +15,16 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 source("./toolbox/toolbox_propa.R", chdir=T)
 
 #=======================================================================================================#
+#
 #                                           SET GLOBAL PARAMETERS
+#
 #=======================================================================================================#
 
 # filename root of the data
-FILENAME_ROOT = "jura_sm4_wn" # guiana_svantek_wn guiana_sm4_wn jura_svantek_wn jura_sm4_wn
+FILENAME_ROOT = "guiana_svantek_wn" # guiana_svantek_wn guiana_sm4_wn jura_svantek_wn jura_sm4_wn
 FILE_DIR = "../data/psd/" 
+# Save results
+SAVE = TRUE
 # display results ?
 PLOT = TRUE
 # SM4 gain correction
@@ -39,7 +45,7 @@ DISTANCE_MIN= 10
 #                   - bkg.PSD.mean, bkg.PSD.std, sig.PSD.mean, sig.PSD.std,
 #
 #====================================================================================================#
-load(paste(FILE_DIR,FILENAME_ROOT, '_average', '.Rdata', sep=""))
+load(paste(FILE_DIR, FILENAME_ROOT, '_average', '.Rdata', sep=""))
 
 #====================================================================================================#
 #               convert spectrum into specbins
@@ -100,7 +106,7 @@ if ((CORRECTION_RECORDER == TRUE) && (grepl("sm4", FILENAME_ROOT) == TRUE))
   # SM4.gain contains the gain to add to the result obtained with a SM4 
   # in order to correct as much as possible the frequency response of the SM4.
   SM4.gain = -power2dB(approx(FREQ_GAIN_CORR, dB2power(GAIN_CORR), f, rule=2)$y)
-
+  
   # create a matrix in order to be able to perform direct subtraction on the matrix of L
   SM4.gain.mat = replicate(dim(L)[2],SM4.gain)
   
@@ -166,6 +172,7 @@ if (PLOT==TRUE)
                                      font = list(size = 10)),
                        xaxis = XAXIS_FREQ ,
                        yaxis =  YAXIS_SPECTRUM)
+  
   show(fig_spectrum)
   
   #====================================================================================================#
@@ -185,7 +192,7 @@ if (PLOT==TRUE)
                      paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
                      xaxis2 = list(title = "Distances [m]"),
                      yaxis = XAXIS_FREQ)
-  show(fig_LdBSPL  )
+  show(fig_LdBSPL)
 }
 
 

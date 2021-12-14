@@ -82,8 +82,8 @@ L = psd2dBSPL(P, gain=G, sensitivity=S, bit=bit, Vadc=VADC, pRef=P_REF)
 L_bkg = psd2dBSPL(P_bkg, gain=G, sensitivity=S, bit=bit, Vadc=VADC, pRef=P_REF) 
 
 #### CORRECTED SIGNAL AFTER AMBIENT SOUND SUBRACTION
-# Set to NA the data below 2x the ambient sound in order to avoid using them for the calculation
-index = P< 2*P_bkg         
+# Set to NA the data below the ambient sound in order to avoid using them for the calculation
+index = P< P_bkg         
 P[index] = NA      
 # subtract the noise level to the original sound level
 P_corr= P-P_bkg 

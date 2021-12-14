@@ -132,7 +132,7 @@ for (dd in 1:length(LIST_R0))
   {
     #### CORRECTED SIGNAL AFTER AMBIENT SOUND SUBRACTION
     # Set to NA the data below the ambient sound in order to avoid using them for the calculation
-    index = P.select < P_bkg.select         
+    index = P.select < 2*P_bkg.select         
     P.select[index] = NA      
     # subtract the noise level to the original sound level
     P.select = P.select-P_bkg.select 

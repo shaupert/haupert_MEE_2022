@@ -7,6 +7,13 @@ rm(list = ls())
 #
 #=======================================================================================================#
 
+if (!require("signal")) install.packages("signal")
+if (!require("fftw")) install.packages("fftw")
+if (!require("rgl")) install.packages("rgl")
+if (!require("rpanel")) install.packages("rpanel")
+if (!require("seewave")) install.packages("seewave", repos="http://cran.at.r-project.org/")
+if (!require("tuneR")) install.packages("tuneR")
+
 library(seewave)
 library(tuneR)
 library(signal)
