@@ -1,7 +1,7 @@
 #dir = getwd()
 ##### CALL functions from MY TOOLBOX
 #source(paste(dir,'/wav2dBSPL.R', sep=''))
-#source("./wav2dBSPL.R", chdir=T)
+source("./wav2dBSPL.R", chdir=T, local=T)
 
 #******** Convert a full PSD into bins PSD with a resolution = res
 specbin <- function (spec, f, res = 0.5)
