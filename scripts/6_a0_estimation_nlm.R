@@ -21,7 +21,7 @@ source("./toolbox/toolbox_propa.R", chdir=T)
 #=======================================================================================================#
 
 # filename root of the data
-FILENAME_ROOT = "jura_svantek_wn" # guiana_svantek_wn guiana_sm4_wn jura_svantek_wn jura_sm4_wn
+FILENAME_ROOT = "jura_sm4_wn" # guiana_svantek_wn guiana_sm4_wn jura_svantek_wn jura_sm4_wn
 FILE_DIR = "../data/psd/"
 # Save results
 SAVE = TRUE
@@ -107,8 +107,8 @@ P_bkg = P_bkg[,DISTANCE_SELECT]
 if (CORRECTION_BKG == TRUE)
 {
   #### CORRECTED SIGNAL AFTER AMBIENT SOUND SUBRACTION
-  # Set to NA the data below 2x the ambient sound in order to avoid using them for the calculation
-  index = P< 2*P_bkg         
+  # Set to NA the data below the ambient sound in order to avoid using them for the calculation
+  index = P< P_bkg         
   P[index] = NA      
   # subtract the noise level to the original sound level
   P= P-P_bkg 
