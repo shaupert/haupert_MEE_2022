@@ -27,7 +27,7 @@ in your environment. Here is the list of library that are requested :
 
 The R scripts to reproduce figures/analyses from our paper are:
  
-* `figure_1a_compute_Leq.R` generates 2D scatters of audio features at various spatial and temporal scales. UMAP is used as a dimensionality reduction technique
+* `figure_1a_compute_Leq.R` generates a figure with the equivalent sound level (Leq) of the white noise and the ambient sound measured at different distances. The white noise is propagated in a neotropical rainforest (French guiana). The receptor is a SongMeter 4 (SM4) from Wildlife acoustics.   
 *
 *
 
