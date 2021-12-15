@@ -27,7 +27,7 @@ in your environment. Here is the list of library that are requested :
 
 The R scripts to reproduce figures/analyses from our paper are:
  
-* `figure_scatter_lowdim.py` generates 2D scatters of audio features at various spatial and temporal scales. UMAP is used as a dimensionality reduction technique
+* `figure_1a_compute_Leq.R` generates 2D scatters of audio features at various spatial and temporal scales. UMAP is used as a dimensionality reduction technique
 *
 *
 
