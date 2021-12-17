@@ -132,7 +132,7 @@ for (dd in 1:length(LIST_R0))
   {
     #### CORRECTED SIGNAL AFTER AMBIENT SOUND SUBRACTION
     # Set to NA the data below the ambient sound in order to avoid using them for the calculation
-    index = P.select < 2*P_bkg.select         
+    index = P.select < P_bkg.select         
     P.select[index] = NA      
     # subtract the noise level to the original sound level
     P.select = P.select-P_bkg.select 
@@ -226,8 +226,8 @@ if (PLOT==TRUE)
   # pl1 = add_trace(pl1, x=f,y=predicted$ci_bsup, type='scatter', mode='lines',name='ci_bsup', line=list(dash='dot',color='red'),marker=list(opacity=0), opacity=1)
   # pl1 = add_trace(pl1, x=f,y=predicted$pi_binf, type='scatter', mode='lines',name='pi_binf', line=list(dash='dash',color='navy'),marker=list(opacity=0), opacity=1)
   # pl1 = add_trace(pl1, x=f,y=predicted$pi_bsup, type='scatter', mode='lines',name='pi_bsup', line=list(dash='dot',color='navy'),marker=list(opacity=0), opacity=1)
-  # pl1 = add_annotations(pl1, x=5, y=0.65, text =paste("a0=",round(a0*1000)/1000," dB/kHz/m", sep=""), showarrow = FALSE,marker=list(opacity=0), opacity=1)
-  # pl1 = add_annotations(pl1, x=4.8, y=0.57, text =paste("r²=",round(r.squared*100)/100, pvalue, sep=""), showarrow = FALSE,marker=list(opacity=0), opacity=1)
+  pl1 = add_annotations(pl1, x=5, y=0.65, text =paste("a0=",round(a0*1000)/1000," dB/kHz/m", sep=""), showarrow = FALSE,marker=list(opacity=0), opacity=1)
+  pl1 = add_annotations(pl1, x=4.8, y=0.57, text =paste("r²=",round(r.squared*100)/100, pvalue, sep=""), showarrow = FALSE,marker=list(opacity=0), opacity=1)
   pl1 = layout(pl1,
                autosize = F, width = 450, height = 300,
                paper_bgcolor='rgb(255,255,255)', 
