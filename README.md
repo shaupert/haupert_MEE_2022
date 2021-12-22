@@ -1,7 +1,7 @@
 # Haupert & al Methods in Ecology and Evolution (2022)
 
 This repository contains all the functions in 'R' that were used to process the data and create figures of the publication 
-[(Haupert et. al. 2022, MEE)](https://www.to.be.defined.fr)
+[Haupert et. al. 2022, MEE](https://www.to.be.defined.fr)
 
 The code is available for reproducability.
 
@@ -40,5 +40,5 @@ is used for data processing while Python is used to build and display the figure
 
 ## Integration of the propagation functions into libraries
 
-For convenience, we added the propagation functions into the library [seewave]https://rug.mnhn.fr/seewave/) (R language) and into the package [scikit-maad](https://scikit-maad.github.io/) (Python language)
+For convenience, we added the propagation functions into the library [seewave](https://rug.mnhn.fr/seewave/) (R language) and into the package [scikit-maad](https://scikit-maad.github.io/) (Python language)
 
