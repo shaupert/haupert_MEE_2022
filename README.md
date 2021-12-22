@@ -48,5 +48,13 @@ All the notebooks are available [here](https://drive.google.com/drive/folders/1p
 
 ## Integration of the propagation functions into libraries
 
-For convenience, we added the propagation functions into the library [seewave](https://rug.mnhn.fr/seewave/) (R language) and into the package [scikit-maad](https://scikit-maad.github.io/) (Python language)
+For convenience, we added the propagation functions into the library [seewave](https://rug.mnhn.fr/seewave/)  (R language) and into the package [scikit-maad](https://scikit-maad.github.io/) (Python language)
+
+<p align="center">
+  <img src="https://rug.mnhn.fr/seewave/PICT/seewave_logo.png" />
+</p>
+<p align="center">
+  <img src="https://scikit-maad.github.io/_images/maad_key_visual_black.png" />
+</p>
+
 
