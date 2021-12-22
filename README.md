@@ -37,6 +37,9 @@ The R scripts to reproduce figures/analyses from our paper are:
 * [`figure_I2_max_distance_lipaugus.R`](https://github.com/shaupert/haupert_MEE_2022/blob/master/scripts/figure_I2_max_distance_lipaugus.R) : Active space obtained by the model in a neotropical rainforest (French Guiana) for the screaming piha (Lipaugus vociferans) which calls at 111.5dB (SPL re20µPa @1m). The active space may depend on the ambient sound level as well as geometric or spreading loss attenuation (Ageo), atmospheric absorption (Aatm) and habitat or environmental attenuation (Ahab). ambient sound level Ln, T°C, RH, PS and a0 values are set to the experimental values found during the French Guiana transect
 
 ## Google Colab
+<p align="center">
+  <img src="https://s2.qwant.com/thumbr/474x190/f/9/aae347431a927c9b5deb63431ea29c0dd6fceb9210443fdd6bb9b3dba23146/th.jpg?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.IVRAF7_KdEVWUFq1wmDvmQHaC-%26pid%3DApi&q=0&b=1&p=0&a=0g" />
+</p>
 
 Google Colab is a very convenient way to test a code written in Python or R without having to install anything on your computer. Everything is run iin the cloud, directly on computers in Google. The required libraries are installed on the fly on the distant computers.
 
