@@ -17,13 +17,12 @@ distance of autonomous recorder units in terrestrial environments? Methods in Ec
 Download the `.zip` from Github (click on `code` then `Download Zip`) and extract all folders without changing the name of the folders neither rearrange the folder
 and sub-folders.
 
-Then, use your favorite R environment (e.g. RStudio). The scripts are ready to be used. They will installed the required libraries if they are not already installed
+Then, use your favorite R environment (e.g. RStudio). The scripts are ready to be used. They will install the required libraries if they are not already installed
 in your environment. Here is the list of library that are requested :
-* seewave
-* tuneR
+* seewave and tuneR
 * plotly
 * robutslrm
-* 
+* tidyverse, ggplot2, dplyr
 
 The R scripts to reproduce figures/analyses from our paper are:
  
@@ -33,14 +32,13 @@ The R scripts to reproduce figures/analyses from our paper are:
 
 ## Google Colab
 
-Google Colab is a very convenient way to test a code written in Python or R without having to install anything on your computer. Everything is run on computers 
-in Google. The required libraries are installed on the fly on the distance computer.
+Google Colab is a very convenient way to test a code written in Python or R without having to install anything on your computer. Everything is run iin the cloud, directly on computers in Google. The required libraries are installed on the fly on the distant computers.
 
-For a interactive way to test our code, we provide most of the R scripts from this repository as Notebook ready to be used on Google Colab. Some adjustment had 
+For an interactive way to test our code, we provide most of the R scripts from this repository as Notebook ready to be used on Google Colab. Some adjustment had 
 to be done to be able to run the scripts as some R libraries such as Plotly for R don't work properly on Google Colab. In such a case, we mixed R and Python. R 
 is used for data processing while Python is used to build and display the figures.
 
 ## Integration of the propagation functions into libraries
 
-For convenience, we added the propagation functions into the library seewave (R language) and into the package scikit-maad (Python language)
+For convenience, we added the propagation functions into the library [seewave]https://rug.mnhn.fr/seewave/) (R language) and into the package [scikit-maad](https://scikit-maad.github.io/) (Python language)
 
