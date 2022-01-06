@@ -1,4 +1,4 @@
-# Haupert & al. How to determine the acoustic detection distance of autonomous recorder units in terrestrial environments? Journal to be defined (XXXX)
+# Haupert S. & al. How to determine the acoustic detection distance of autonomous recorder units in terrestrial environments? Journal to be defined (XXXX)
 
 This repository contains all the functions in 'R' that were used to process the data and create figures of the publication 
 [Haupert et. al. XXXX, journal to be defined](https://www.to.be.defined.fr)
