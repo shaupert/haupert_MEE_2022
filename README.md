@@ -1,7 +1,7 @@
-# Haupert & al Methods in Ecology and Evolution (2022)
+# Haupert & al. How to determine the acoustic detection distance of autonomous recorder units in terrestrial environments? Journal to be defined (XXXX)
 
 This repository contains all the functions in 'R' that were used to process the data and create figures of the publication 
-[Haupert et. al. 2022, MEE](https://www.to.be.defined.fr)
+[Haupert et. al. XXXX, journal to be defined](https://www.to.be.defined.fr)
 
 The code is available for reproducability.
 
@@ -10,7 +10,7 @@ This repository is archived on Zenodo:
 [![DOI](https://zenodo.org/badge/DOI/XXXX/zenodo.XXXXXX.svg)](https://doi.org/10.5281/zenodo.3530203)
 
 If the code, even partially, is used for other purpose please cite the paper `Haupert S., Sèbe F., Sueur J. How to determine the acoustic detection 
-distance of autonomous recorder units in terrestrial environments? Methods in Ecology and Evolution, 2022`
+distance of autonomous recorder units in terrestrial environments? journal to be defined, XXXX`
 
 ## Setup and usage
 
