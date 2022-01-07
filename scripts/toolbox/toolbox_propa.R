@@ -299,7 +299,7 @@ propa.Aatm <- function(f, r=NA, r0=NA, t=20, rh=60, pa=101325)
 ########################
 
 #********  Habitat attenuation
-propa.Ahab<- function(f, r=NA, r0=NA, A0=0.02)
+propa.Ahab<- function(f, r=NA, r0=NA, a0=0.02)
 {
   " 
   Get the habitat attenuation factor and in dB and coefficients in Neper/m and dB/m  
@@ -308,7 +308,7 @@ propa.Ahab<- function(f, r=NA, r0=NA, A0=0.02)
   f: frequency in kHz [SCALAR]
   r : propagation distances in m [SCALAR or VECTOR]
   r0 : reference distance in m [SCALAR]
-  A0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
+  a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
   
   OUTPUT
   return a list with 
@@ -320,7 +320,7 @@ propa.Ahab<- function(f, r=NA, r0=NA, A0=0.02)
   - coeff.db : habitat attenuation coefficient in dB/m
   "
   
-  coef.Ahab.dB = A0*f 
+  coef.Ahab.dB = a0*f 
   coef.Ahab = coef.Ahab.dB / 20*log10(exp(1))
 
   if (sum(is.na(r) == 0) >0 & sum(is.na(r0) == 0) >0)
@@ -342,7 +342,7 @@ propa.Ahab<- function(f, r=NA, r0=NA, A0=0.02)
 ########################
 
 #************ full attenuation
-propa.Atotal  <- function(f, r, r0, t=20, rh=60, pa=101325, A0=0.02)
+propa.Atotal  <- function(f, r, r0, t=20, rh=60, pa=101325, a0=0.02)
 {
   " 
   get full attenuation factor and dB taking into account the geometric, atmospheric and habitat attenuation contributions
@@ -354,7 +354,7 @@ propa.Atotal  <- function(f, r, r0, t=20, rh=60, pa=101325, A0=0.02)
   t: temperature in °C [SCALAR]
   rh: relative humidity in % [SCALAR]
   pa: atmospheric pressure in Pa [SCALAR]
-  A0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
+  a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
   
   OUTPUT:
   factor : return the total attenuation factor of an acoustic pressure [Pa]
@@ -365,11 +365,11 @@ propa.Atotal  <- function(f, r, r0, t=20, rh=60, pa=101325, A0=0.02)
   
   # Replicate the geometric attenuation vector (length of r) the number of time the length of f
   Ageo.matrix = matrix(rep(propa.Ageo(r,r0)$factor, each=length(f)), nrow=length(f))
-  Atotal = Ageo.matrix * propa.Aatm(f,r,r0,t,rh,pa)$factor * propa.Ahab(f,r,r0,A0)$factor
+  Atotal = Ageo.matrix * propa.Aatm(f,r,r0,t,rh,pa)$factor * propa.Ahab(f,r,r0,a0)$factor
 
   # Replicate the geometric attenuation vector (length of r) the number of time the length of f
   Ageo.matrix.dB = matrix(rep(propa.Ageo(r,r0)$db, each=length(f)), nrow=length(f))  
-  Atotal.dB = Ageo.matrix.dB + propa.Aatm(f,r,r0,t,rh,pa)$db + propa.Ahab(f,r,r0,A0)$db  
+  Atotal.dB = Ageo.matrix.dB + propa.Aatm(f,r,r0,t,rh,pa)$db + propa.Ahab(f,r,r0,a0)$db  
   
   return (list(factor = Atotal, db = Atotal.dB))
 }
@@ -413,7 +413,7 @@ propa.dBSPL_per_bin <- function(L, f)
 ########################
 
 #************** detection distance
-propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=60, pa=101325, A0=0.02)
+propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=60, pa=101325, a0=0.02)
 {
   " 
   get full attenuation factor taking into account the geometric, atmospheric and habitat attenuation contributions
@@ -427,7 +427,7 @@ propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=6
   t: temperature in °C [SCALAR]
   rh: relative humidity in % [SCALAR]
   pa: atmospheric pressure in Pa [SCALAR]
-  A0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
+  a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
   
   OUTPUT:
   distance_max : maximum distance of propagation before the sound pressure level is below the background [SCALAR or VECTOR
@@ -446,7 +446,7 @@ propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=6
   for (ii in (1:length(f)))
   {
     # Get the pressure from the full attenuation model knowing the pressure p0 at r0
-    L0.simu = L0[ii] - propa.Atotal(f[ii], r, r0, t, rh, pa, A0)$db
+    L0.simu = L0[ii] - propa.Atotal(f[ii], r, r0, t, rh, pa, a0)$db
     # Get the background pressure corresponding to the frequency
     L_bkg.exp = L_bkg[ii]
     # distance max
@@ -465,7 +465,7 @@ propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=6
 ########################
 
 # #************* apply attenuation
-propa.apply.att <- function(p0, fs, r, r0= 1, t=20, rh=60, pa=101325, A0=0.02)
+propa.apply.att <- function(p0, fs, r, r0= 1, t=20, rh=60, pa=101325, a0=0.02)
 {
   " 
   Apply attenuation of a temporal signal p0 after propagation between the reference distance r0 and the final distance r 
@@ -479,7 +479,7 @@ propa.apply.att <- function(p0, fs, r, r0= 1, t=20, rh=60, pa=101325, A0=0.02)
   t: temperature in °C [SCALAR]
   rh: relative humidity in % [SCALAR]
   pa: atmospheric pressure in Pa [SCALAR]
-  A0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
+  a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
   
   OUTPUT:
   p : temporal signal (time domain) after attenuation [VECTOR]
@@ -489,7 +489,7 @@ propa.apply.att <- function(p0, fs, r, r0= 1, t=20, rh=60, pa=101325, A0=0.02)
   P0 = fft(p0)/length(p0)
   f = seq(0,length(P0)-1) / length(P0) * fs /2
   # apply attenuation
-  P = P0  * propa.Atotal(f/1000, r, r0, t, rh, pa, A0)$factor
+  P = P0  * propa.Atotal(f/1000, r, r0, t, rh, pa, a0)$factor
   # Go back to the time domain
   p = fft(P, inverse=TRUE)
   # keep the real part
@@ -501,7 +501,7 @@ propa.apply.att <- function(p0, fs, r, r0= 1, t=20, rh=60, pa=101325, A0=0.02)
 ########################
 
 #************************** Get the pressure at r0 from simulation
-propa.p_at_r0 <- function(f, r, p, r0=1, t=20, rh=60, pa=101325, A0=0.02)
+propa.p_at_r0 <- function(f, r, p, r0=1, t=20, rh=60, pa=101325, a0=0.02)
 {
   " 
     get the pressure at distance r0 from experimental values of pressure p measured at distance r.
@@ -515,7 +515,7 @@ propa.p_at_r0 <- function(f, r, p, r0=1, t=20, rh=60, pa=101325, A0=0.02)
     t: temperature in °C [SCALAR]
     rh: relative humidity in % [SCALAR]
     pa: atmospheric pressure in Pa [SCALAR]
-    A0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
+    a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
 
   OUTPUT:
     p0 : estimated pressure at distance r0 [SCALAR]
@@ -526,6 +526,6 @@ propa.p_at_r0 <- function(f, r, p, r0=1, t=20, rh=60, pa=101325, A0=0.02)
   p0 = p * Ageo.matrix**(-1)
   # p0 = p0 * exp(func.coeff.Aa(f, t, rh, pa) %*% t(r-r0))
   p0 = p0 * (propa.Aatm(f, t, rh, pa)$factor)**(-1)
-  p0 = p0 * (propa.Ahab(f, r, r0, A0)$factor)
+  p0 = p0 * (propa.Ahab(f, r, r0, a0)$factor)
   return (p0)  
 } 
