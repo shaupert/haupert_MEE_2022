@@ -61,7 +61,7 @@ propa.plot.active_distance <- function (f, d, title='Detection distance', xtitle
   return (p)
 }
 
-propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh=60, pa=101325, A0=0.02, 
+propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh=60, pa=101325, a0=0.02, 
                                                  showlegend=FALSE, fmin=1, fmax=6, dbmin_spl=0, dbmax_spl=120, 
                                                  dbmin_att=0,dbmax_att=100, dmin=0, dmax=1000)
 {
@@ -71,7 +71,7 @@ propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh
   for (ii in (1:length(d)))
   {
     Aatm.dB[ii] = propa.Aatm(f[ii], r=d[ii],r0, t, rh, pa)$db
-    Ahab.dB[ii] = propa.Ahab(f[ii],r=d[ii],r0,A0)$db
+    Ahab.dB[ii] = propa.Ahab(f[ii],r=d[ii],r0,a0)$db
   }
   
   fig0 = plot_ly(x=L0, y=f, type = 'scatter', mode = 'lines',orientation = 'h', name="source")
@@ -354,14 +354,14 @@ if ((CORRECTION_RECORDER == TRUE) && (grepl("sm4", FILENAME_ROOT) == TRUE))
 } 
 
 # get the maximum listening distance 
-dmax = propa.detection_distance(L_bkg=L_bkg, L0=L0_per_bin, f=f, r0= R0, delta_r=1, t=TEMP, rh=RH, pa=PS0, A0=A0)
+dmax = propa.detection_distance(L_bkg=L_bkg, L0=L0_per_bin, f=f, r0= R0, delta_r=1, t=TEMP, rh=RH, pa=PS0, a0=A0)
 
 # distance min, max, avg
 dmax.min = min(dmax[,2])
 dmax.max = max(dmax[,2])
 dmax.avg = mean(dmax[,2])
 
-fig1 = propa.plot.active_distance_compiled(L_bkg=L_bkg, L0=L0_per_bin, f=dmax[,1], d=dmax[,2], r0= R0, t=TEMP, rh=RH, pa=PS0, A0=A0, 
+fig1 = propa.plot.active_distance_compiled(L_bkg=L_bkg, L0=L0_per_bin, f=dmax[,1], d=dmax[,2], r0= R0, t=TEMP, rh=RH, pa=PS0, a0=A0, 
                                            showlegend=TRUE, fmin=F0-DELTA_FBIN, fmax=F1+DELTA_FBIN, dbmin_spl=0, dbmax_spl=dBMAX_SPL, dbmin_att=0, dbmax_att=dBMAX_ATT, dmin=0, dmax=D_MAX)
 
 layout(fig1,
@@ -383,7 +383,7 @@ PS0 = 87999 # atmospheric pressure in Pa
 A0 = 0.020 # coef attenuation of the habitat (JURA)
 Ageo = propa.Ageo(r=R, r0=R0)$db
 Aatm = propa.Aatm(f=F1, r=R, r0=R0, t=TEMP, rh=RH, pa= PS0)$db
-Ahab = propa.Ahab(f=F1, r=R, r0=R0, A0=A0)$db
+Ahab = propa.Ahab(f=F1, r=R, r0=R0, a0=A0)$db
 
 # Sound pressure level at r0 for the frequency f1
 L0 = L + Ageo + Aatm + Ahab
@@ -398,7 +398,7 @@ PS0 = 87999 # atmospheric pressure in Pa
 A0 = 0.020 # coef attenuation of the habitat (JURA)
 Ageo = propa.Ageo(r=R, r0=R0)$db
 Aatm = propa.Aatm(f=F1, r=R, r0=R0, t=TEMP, rh=RH, pa= PS0)$db
-Ahab = propa.Ahab(f=F1, r=R, r0=R0, A0=A0)$db
+Ahab = propa.Ahab(f=F1, r=R, r0=R0, a0=A0)$db
 
 # Sound pressure level at r0 for the frequency f1
 L0 = L + Ageo + Aatm + Ahab
@@ -429,7 +429,7 @@ p0.piha.wav = piha.wav@left - mean(piha.wav@left)
 p0.bkg.wav = bkg.wav@left - mean(bkg.wav@left)
 
 # apply attenuation. Environmental values are the same as in the article
-p.piha.wav= propa.apply.att(p0.piha.wav, fs, r=R, r0= R0, t=24, rh=87, pa=101325, A0=0.019)
+p.piha.wav= propa.apply.att(p0.piha.wav, fs, r=R, r0= R0, t=24, rh=87, pa=101325, a0=0.019)
 # add original background to the data after propagation because attenuation process also attenuate background...
 p.piha.wav = p.piha.wav + p0.bkg.wav*0.5
 p0.piha.wav = p0.piha.wav + p0.bkg.wav*0.5
@@ -518,7 +518,7 @@ for (ii in 1:length(R))
 {
   sprintf("final distance %d m", R[ii])
   # apply attenuation. Environmental values are the same as in the article
-  p.piha.att= propa.apply.att(p0.piha, fs, r=R[ii], r0= R0, t=24, rh=87, pa=101325, A0=0.019)
+  p.piha.att= propa.apply.att(p0.piha, fs, r=R[ii], r0= R0, t=24, rh=87, pa=101325, a0=0.019)
   # mixup with original background with signal after propagation because attenuation process also attenuate background...
   p.piha.att = p.piha.att + p0.bkg*0.5
   N = 512

@@ -53,7 +53,7 @@ for (ii in 1:length(R))
 {
   sprintf("final distance %d m", R[ii])
   # apply attenuation. Environmental values are the same as in the article
-  p.piha.att= propa.apply.att(p0.piha, fs, r=R[ii], r0= R0, t=24, rh=87, pa=101325, A0=0.019)
+  p.piha.att= propa.apply.att(p0.piha, fs, r=R[ii], r0= R0, t=24, rh=87, pa=101325, a0=0.019)
   # mixup with original background with signal after propagation because attenuation process also attenuate background...
   p.piha.att = p.piha.att + p0.bkg*1
   N = 512

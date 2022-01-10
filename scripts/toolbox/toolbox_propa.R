@@ -430,7 +430,7 @@ propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=6
   a0 : attenuation coefficient of the habitat in dB/kHz/m [SCALAR]
   
   OUTPUT:
-  distance_max : maximum distance of propagation before the sound pressure level is below the background [SCALAR or VECTOR
+  distance_max : maximum distance of propagation before the sound pressure level is below the background [SCALAR or VECTOR]
   "
   # set f0 and f1 depending if freq is a single value or a vector
   if (length(f)>1) {f0 = f[1]; f1=f[length(f)]}
@@ -442,16 +442,15 @@ propa.detection_distance  <- function(L_bkg, L0, f, r0= 1, delta_r=1, t=20, rh=6
   # set the distance max vector to store the result
   distance_max = rep(NA,length(f))
 
-  # test for each frequency when the simulated pressure at distance r is below the background pressure
+  # test for each frequency when the sound level L at distance r is below the background level L_bkg
   for (ii in (1:length(f)))
   {
-    # Get the pressure from the full attenuation model knowing the pressure p0 at r0
-    L0.simu = L0[ii] - propa.Atotal(f[ii], r, r0, t, rh, pa, a0)$db
-    # Get the background pressure corresponding to the frequency
-    L_bkg.exp = L_bkg[ii]
+    # Get the sound level after subtracting the full attenuation
+    L = L0[ii] - propa.Atotal(f[ii], r, r0, t, rh, pa, a0)$db
+    
     # distance max
-    if (sum((L0.simu - L_bkg.exp)>0)>1) {
-      distance_max[ii] = r[which.min((L0.simu - L_bkg.exp)[(L0.simu - L_bkg.exp)>0])] 
+    if (sum((L - L_bkg[ii])>0)>1) {
+      distance_max[ii] = r[which.min((L - L_bkg[ii])[(L - L_bkg[ii])>0])] 
     } 
     else {
       distance_max[ii] = 0

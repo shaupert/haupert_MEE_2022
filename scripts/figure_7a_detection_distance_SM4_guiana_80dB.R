@@ -28,7 +28,7 @@ source("./toolbox/toolbox_propa.R", chdir=T)
 #
 #=======================================================================================================#
 
-propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh=60, pa=101325, A0=0.02, 
+propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh=60, pa=101325, a0=0.02, 
                                                  showlegend=FALSE, fmin=1, fmax=6, dbmin_spl=0, dbmax_spl=120, 
                                                  dbmin_att=0,dbmax_att=100, dmin=0, dmax=1000)
 {
@@ -38,7 +38,7 @@ propa.plot.active_distance_compiled <- function (L0, L_bkg, f, d, r0=1, t=20, rh
   for (ii in (1:length(d)))
   {
     Aatm.dB[ii] = propa.Aatm(f[ii], r=d[ii],r0, t, rh, pa)$db
-    Ahab.dB[ii] = propa.Ahab(f[ii],r=d[ii],r0,A0)$db
+    Ahab.dB[ii] = propa.Ahab(f[ii],r=d[ii],r0,a0)$db
   }
   
   fig0 = plot_ly(x=L0, y=f, type = 'scatter', mode = 'lines',orientation = 'h', name="source")
@@ -172,7 +172,7 @@ if ((CORRECTION_RECORDER == TRUE) && (grepl("sm4", FILENAME_ROOT) == TRUE))
 } 
 
 # get the maximum listening distance 
-dmax = propa.detection_distance(L_bkg=L_bkg, L0=L0_per_bin, f=f, r0= R0, delta_r=1, t=TEMP, rh=RH, pa=PS0, A0=A0)
+dmax = propa.detection_distance(L_bkg=L_bkg, L0=L0_per_bin, f=f, r0= R0, delta_r=1, t=TEMP, rh=RH, pa=PS0, a0=A0)
 
 # distance min, max, avg
 dmax.min = min(dmax[,2])
@@ -180,7 +180,7 @@ dmax.max = max(dmax[,2])
 dmax.avg_inf10kHz = mean(dmax[dmax[,1]<10,2])
 dmax.avg_sup10kHz = mean(dmax[dmax[,1]>10,2])
 
-p = propa.plot.active_distance_compiled(L_bkg=L_bkg, L0=L0_per_bin, f=dmax[,1], d=dmax[,2], r0= R0, t=TEMP, rh=RH, pa=PS0, A0=A0, 
+p = propa.plot.active_distance_compiled(L_bkg=L_bkg, L0=L0_per_bin, f=dmax[,1], d=dmax[,2], r0= R0, t=TEMP, rh=RH, pa=PS0, a0=A0, 
                                     showlegend=TRUE, fmin=F0-DELTA_FBIN, fmax=F1+DELTA_FBIN, 
                                     dbmin_spl=0, dbmax_spl=dBMAX_SPL, dbmin_att=0, dbmax_att=dBMAX_ATT, dmin=0, dmax=D_MAX)
 

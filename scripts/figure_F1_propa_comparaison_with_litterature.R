@@ -7,8 +7,8 @@ library(plotly)
 source("/home/haupert/DATA/mes_projets/_TOOLBOX/R/propagation/toolbox_propa.R")
 
 
-A0_jura = 0.022   # average value between SVANTEK and SM4
-A0_guiana = 0.015 # average value between SVANTEK and SM4
+a0_jura = 0.022   # average value between SVANTEK and SM4
+a0_guiana = 0.015 # average value between SVANTEK and SM4
 
 f = seq(1000,10000,1000)
 f2 = seq(200,4000,1000)
@@ -52,8 +52,8 @@ p <- add_trace(p, x = c(250,500, 1000,2000,4000,8000), y = c(0.04,0.05, 0.06,0.0
 
 
 # my study
-p <- add_trace(p, x = f4, y = f4*A0_guiana/1000, type = 'scatter',  mode = 'lines+markers', name='this study (Neotropical rainforest)', line=list(color='black',dash = 'solid'),marker=list(color='black',symbol='cross'),opacity=1) 
-p <- add_trace(p, x = f4, y = f4*A0_jura/1000, type = 'scatter',  mode = 'lines+markers', name='this study (Temperate cold forest)', line=list(color='black',dash = 'dot'),marker=list(color='black',symbol='open circle'),opacity=1) 
+p <- add_trace(p, x = f4, y = f4*a0_guiana/1000, type = 'scatter',  mode = 'lines+markers', name='this study (Neotropical rainforest)', line=list(color='black',dash = 'solid'),marker=list(color='black',symbol='cross'),opacity=1) 
+p <- add_trace(p, x = f4, y = f4*a0_jura/1000, type = 'scatter',  mode = 'lines+markers', name='this study (Temperate cold forest)', line=list(color='black',dash = 'dot'),marker=list(color='black',symbol='open circle'),opacity=1) 
 
 # Found with our data when avering data in order to test Price law EA = m * log10(f) - c
 # p <- add_trace(p, x = f, y = 0.130*log10(f)-0.36, type = 'scatter', mode = 'lines+markers',name='this study (EA=mlog10(f)-c)', line=list(color='black',dash = 'solid'), marker=list(color='black',symbol='diamond-open'))

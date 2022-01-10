@@ -114,10 +114,10 @@ for (mm in seq(1:12))
   light[hour %in% hour.night] = 'night'
 
   df$ps0 = ps0
-  df$A0 = A0
+  df$a0 = A0
   
   # select frequency
-  df = df[c('hour', 'temperature', 'HR', 'ps0', 'A0', select_bandwidth[,1])]
+  df = df[c('hour', 'temperature', 'HR', 'ps0', 'a0', select_bandwidth[,1])]
 
   # set the L0 per frequency and hour of day
   df[select_bandwidth[,2]] = rep(L0,24)
@@ -145,7 +145,7 @@ for (mm in seq(1:12))
   # get the maximum listening distance 
   for (row in (1:nrow(df)))
   {
-    dmax = propa.detection_distance(L_bkg=unlist(df[row,select_bandwidth[,1]]), L0=unlist(df[row,select_bandwidth[,2]]), f=fn, r0= 1, delta_r=1, t=unlist(df[row,'temperature']), rh=unlist(df[row,'HR']), pa=unlist(df[row,'ps0']), A0=unlist(df[row,'A0']))
+    dmax = propa.detection_distance(L_bkg=unlist(df[row,select_bandwidth[,1]]), L0=unlist(df[row,select_bandwidth[,2]]), f=fn, r0= 1, delta_r=1, t=unlist(df[row,'temperature']), rh=unlist(df[row,'HR']), pa=unlist(df[row,'ps0']), a0=unlist(df[row,'a0']))
     df$dmax[row] = list(as.vector(dmax[,2]))
   }
   
